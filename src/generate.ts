@@ -10,9 +10,10 @@ export type Word = {
 	direction: "V" | "H";
 }
 
-export function generate(words:string[]): [Position[][], Word[]]{
-	const grid = generateGrid(25,25);
-	const placedWords = generateWords(words)
+export function generate(words:string[], {columns, rows}:{columns:number, rows:number}): [Position[][], Word[]]{
+	if(columns == 0 || rows == 0) return [[[]],[]]
+	const grid = generateGrid(rows,columns);
+	const placedWords = generateWords(words, {columns, rows})
 	for(let word of placedWords){
 		for(let pos of word.positions){
 			grid[pos.row][pos.column] = pos;
@@ -32,24 +33,24 @@ function generateGrid(rowsLength: number, columnsLength: number) {
 	return grid;
 }
 
-function generateWords(words: string[]): Word[] {
+function generateWords(words: string[], gridSize:{columns:number; rows:number;}): Word[] {
 	const placedWords: Word[] = [];
 	for (let word of words) {
-		placedWords.push(placeWord(word, placedWords, 25))
+		placedWords.push(placeWord(word, placedWords, gridSize))
 	}
 
 	return placedWords
 }
 
-function placeWord(word: string, placedWords: Word[], gridSize: number):Word {
+function placeWord(word: string, placedWords: Word[], gridSize: {rows:number, columns:number}):Word {
 	// 1. pick a direction
 	const direction = Math.random() > .5 ? "H" : "V"
 	// 2. pick a start
 	const wLength = word.length
-	const maxStart = gridSize - wLength
+	const maxStart = gridSize[direction == "V" ? "rows" : "columns"] - wLength
 	const startPos:Position = {
 		[direction == "V" ? "row" : "column"] : Math.floor(Math.random() * maxStart),
-		[direction != "V" ? "row" : "column"] : Math.floor(Math.random() * gridSize)
+		[direction != "V" ? "row" : "column"] : Math.floor(Math.random() * (direction == "V" ? gridSize.columns : gridSize.rows)),
 	}
 	let placedWord:Word = {name:word, positions:[],direction};
 	let cachedPositions = placedWords.flatMap(pw=>pw.positions)
