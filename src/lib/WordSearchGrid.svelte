@@ -8,9 +8,8 @@
 
 	function fitToScreen(){
 		const {innerWidth:w, innerHeight:h} = window
-		console.log(w,h)
 		if(h > w) {
-			return {columns:19, rows:32}
+			return {columns:15, rows:25}
 		}
 		return {columns:25, rows:25}
 	}
@@ -58,20 +57,13 @@
 	}
 </script>
 
-<!--
-# Do do mobile.
-- get the target element position.
-- get the distance from the start 
-- decide how many squares the are between the start and current position
-- find what squares those are and add them to the selection.
--->
 <div
 	on:pointerdown={startSelecting}
 	on:pointerup={stopSelecting}
 	on:pointerleave={stopSelecting}
 	on:mouseup={stopSelecting}
 	on:pointermove={selectWord}
-	class="bg-zinc-50 relative"
+	class="bg-zinc-50 "
 	style="touch-action:none;"
 >
 	{#each grid as row}
@@ -82,21 +74,3 @@
 		</div>
 	{/each}
 </div>
-
-<!-- <div -->
-<!-- 	on:mousedown={startSelecting} -->
-<!-- 	on:mouseup={stopSelecting} -->
-<!-- 	on:mouseleave={stopSelecting} -->
-<!-- 	on:mousemove={selectWord} -->
-<!-- 	tabindex="-1" -->
-<!-- 	role="button" -->
-<!-- 	class="bg-zinc-50" -->
-<!-- > -->
-<!-- 	{#each grid as row} -->
-<!-- 		<div class="row flex select-none"> -->
-<!-- 			{#each row as tile} -->
-<!-- 				<Tile {tile} {selection} {foundTiles} /> -->
-<!-- 			{/each} -->
-<!-- 		</div> -->
-<!-- 	{/each} -->
-<!-- </div> -->

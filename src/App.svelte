@@ -17,7 +17,7 @@
 
 <div class="flex gap-4 min-h-[100vh]">
 	<button
-		class="p-2 bg-amber-600 text-white absolute z-20"
+		class="p-2 bg-amber-600 text-white fixed z-50"
 		on:click={toggleSidebar}
 		title={isSidebarActive ? "close sidebar" : "show sidebar"}
 	>
@@ -56,12 +56,17 @@
 </div>
 
 <style>
+:global(html,body){
+	overscroll-behavior-x:none!important;
+}
 	:global(body, #app) {
 		min-height: 100vh;
 		margin: 0;
 		padding: 0;
+		overflow:hidden;
 	}
 	:global(:root){
+	overflow: hidden;
 		@apply bg-amber-50 text-amber-900;
 	}
 	#app {

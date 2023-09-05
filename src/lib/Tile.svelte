@@ -20,7 +20,6 @@
 			coord.x >= x &&
 			coord.x < x + width
 		) {
-			console.log(thisTile);
 			return true;
 		}
 		return false;
