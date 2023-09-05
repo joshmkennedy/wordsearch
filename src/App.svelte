@@ -17,7 +17,7 @@
 
 <div class="flex gap-4 min-h-[100vh]">
 	<button
-		class="p-2 bg-amber-600 text-white absolute z-10"
+		class="p-2 bg-amber-600 text-white absolute z-20"
 		on:click={toggleSidebar}
 		title={isSidebarActive ? "close sidebar" : "show sidebar"}
 	>
@@ -28,7 +28,7 @@
 		{/if}
 	</button >
 	{#if isSidebarActive}
-		<aside class="md:max-w-[252px] shadow md:shadow-none absolute w-[80vw] h-full md:h-auto md:relative flex-1 bg-zinc-50 text-amber-700 pt-12">
+		<aside class="md:max-w-[252px] shadow z-10 md:shadow-none absolute w-[80vw] h-full md:h-auto md:relative flex-1 bg-zinc-50 text-amber-700 pt-12">
 			<article class="border-b pb-5">
 				<header 
 					class="p-2 flex items-baseline justify-between gap-1"
@@ -48,7 +48,7 @@
 	{/if}
 	<main class="flex flex-col justify-start pt-10 items-center flex-1">
 		<div
-			class="p-2  aspect-square max-w-full w-auto h-auto max-h-screen"
+			class="p-2  aspect-square max-w-[900px] h-auto max-h-screen w-full"
 		>
 			<WordSearchGrid {words} on:foundWord={handleFoundWord} />
 		</div>
@@ -60,9 +60,11 @@
 		min-height: 100vh;
 		margin: 0;
 		padding: 0;
-		overflow:hidden;
 	}
 	:global(:root){
 		@apply bg-amber-50 text-amber-900;
+	}
+	#app {
+		padding-bottom:1rem;
 	}
 </style>
