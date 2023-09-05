@@ -14,7 +14,9 @@
 	function startSelecting() {
 		isSelecting = true;
 	}
-	function stopSelecting() {
+	function stopSelecting(e) {
+		console.log("stop selecting", e)
+		if(e.target != e.currentTarget) return
 		isSelecting = false;
 		const word = [...selection.values()].join("");
 		const tiles = [...selection.entries()].map(([el, ch]) => {
@@ -25,7 +27,7 @@
 				ch: ch,
 			};
 		});
-		foundTiles = foundTiles
+		foundTiles = foundTiles;
 		if (words.includes(word)) {
 			foundTiles.push(...tiles);
 			dispatch("foundWord", { word });
@@ -46,15 +48,24 @@
 		selection = selection;
 	}
 </script>
-
+<!--
+# Do do mobile.
+- get the target element position.
+- get the distance from the start 
+- decide how many squares the are between the start and current position
+- find what squares those are and add them to the selection.
+-->
 <div
-	on:mousedown={startSelecting}
-	on:mouseup={stopSelecting}
-	on:mouseleave={stopSelecting}
-	on:mousemove={selectWord}
-	tabindex="-1"
-	role="button"
+	on:pointerdown={startSelecting}
+	on:pointerup={stopSelecting}
+	on:pointerleave={stopSelecting}
+	on:pointermove={(e) => {
+	e.preventDefault()
+		console.log(e)
+		selectWord(e);
+	}}
 	class="bg-zinc-50"
+	style="touch-action:none;"
 >
 	{#each grid as row}
 		<div class="row flex select-none">
