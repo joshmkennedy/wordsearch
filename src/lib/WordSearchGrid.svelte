@@ -1,18 +1,10 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
-	import { generate } from "../generate";
+	import { generate, fitToScreen} from "../generate";
 	import type { Position } from "../generate";
 	import Tile from "./Tile.svelte";
 	export let words: string[];
 	export let foundTiles: Position[] = [];
-
-	function fitToScreen(){
-		const {innerWidth:w, innerHeight:h} = window
-		if(h > w) {
-			return {columns:15, rows:25}
-		}
-		return {columns:25, rows:25}
-	}
 
 	const [grid, wordPositions] = generate(words,fitToScreen());
 
@@ -35,9 +27,9 @@
 				ch: ch,
 			};
 		});
-		foundTiles = foundTiles;
-		if (words.includes(word)) {
+		if (words.includes(word) || words.includes(word.split('').reverse().join(''))) {
 			foundTiles.push(...tiles);
+			foundTiles = foundTiles;
 			dispatch("foundWord", { word });
 		}
 		selection.clear();
