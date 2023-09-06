@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from "svelte";
 	import { generate, fitToScreen} from "../generate";
+	import {positionListsEqual} from "../utils";
 	import type { Position } from "../generate";
 	import Tile from "./Tile.svelte";
 	export let words: string[];
@@ -19,7 +20,8 @@
 	function stopSelecting(e:PointerEvent|MouseEvent) {
 		isSelecting = false;
 		const word = [...selection.values()].join("");
-		const tiles = [...selection.entries()].map(([el, ch]) => {
+		const reversedWord = word.split('').reverse().join('')
+		const tiles:Position[] = [...selection.entries()].map(([el, ch]) => {
 			const { row, column } = el.dataset;
 			return {
 				row: +row,
@@ -27,7 +29,14 @@
 				ch: ch,
 			};
 		});
-		if (words.includes(word) || words.includes(word.split('').reverse().join(''))) {
+		const foundAsDrawn = words.includes(word)
+		const foundReversed = words.includes(reversedWord)
+		if ( foundAsDrawn || foundReversed ) {
+			const foundWord = wordPositions.find(w=>w.name === reversedWord || w.name === word)
+			if(foundReversed){
+				tiles.reverse()
+			}
+			if(foundWord && positionListsEqual(foundWord.positions, tiles))
 			foundTiles.push(...tiles);
 			foundTiles = foundTiles;
 			dispatch("foundWord", { word });
