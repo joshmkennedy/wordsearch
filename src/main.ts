@@ -14,7 +14,7 @@ function preventBrowserHistorySwipeGestures() {
       const touch = ev.touches[0];
       if (
         (touch.clientX < window.innerWidth * 0.1 ||
-        touch.clientX > window.innerWidth * 0.9) && target.tagName !="BUTTON"
+        touch.clientX > window.innerWidth * 0.9) && ev.target.tagName !="BUTTON"
       ) {
         ev.preventDefault();
       }
@@ -23,7 +23,7 @@ function preventBrowserHistorySwipeGestures() {
 
   // Safari defaults to passive: true for the touchstart event, so we need  to explicitly specify false
   // See https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
-  const options= { passive: true };
+  const options= { passive: false };
 
   window.addEventListener("touchstart", touchStart, options);
 

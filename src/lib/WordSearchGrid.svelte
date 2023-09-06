@@ -23,6 +23,7 @@
 		const reversedWord = word.split('').reverse().join('')
 		const tiles:Position[] = [...selection.entries()].map(([el, ch]) => {
 			const { row, column } = el.dataset;
+			if(!row || !column) throw new Error("tiles do not have proper attributes")
 			return {
 				row: +row,
 				column: +column,
