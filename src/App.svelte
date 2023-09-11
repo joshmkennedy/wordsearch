@@ -64,11 +64,17 @@
 </div>
 
 {#if foundWords.length == words.length}
-	<div class="backdrop-filter blur">
-		<div class="max-w-xs p-5">
-			<h2>Congrats!</h2>
-			<p>You found all {words.length} words</p>
-			<button on:click={restart}>Play again?</button>
+	<div class="fixed backdrop-blur z-50 bg-black bg-opacity-40 inset-0 flex justify-center items-center">
+		<div class=" relative z-50 max-w-xs text-center p-5 bg-white rounded shadow-2xl">
+			<h2 class="text-2xl text-amber-600 mb-5">Congrats!</h2>
+			<p class="mb-5">You found all {words.length} words</p>
+			<button
+				class="bg-amber-600 text-white hover:bg-amber-700 p-3 rounded font-bold px-4"
+				on:click={()=>{
+					foundWords = []
+					restart()
+				}}
+			>Play again?</button>
 		</div>
 	</div>
 {/if}
