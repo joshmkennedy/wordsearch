@@ -1,5 +1,5 @@
 
-const wordList = [
+const fruitList = [
 	"acai",
 	"apple",
 	"apricot",
@@ -62,9 +62,33 @@ const wordList = [
 	"watermelon",
 	"yuzu",
 ];
+let HCS = [
+	"school",
+	"hillcity",
+	"montessori",
+	"math",
+	"science",
+	"language",
+	"classroom",
+	"teacher",
+	"history",
+	"playground",
+	"lunchbox",
+	"backpack",
+]
 
-export function getWords():string[]{
-	const ws = [...wordList]
+let wordLists:Record<string, string[]> = {
+	fruitlist:fruitList,
+	hcs:HCS,
+}
+
+
+export function getWords(wordList:string):string[]{
+	let list = fruitList
+	if (wordList in wordLists){
+		list = wordLists[wordList]
+	}
+	const ws = [...list]
 	ws.sort((a,b)=>Math.random() > .5 ? 1 : -1)
 	ws.length = 12 
 	return ws

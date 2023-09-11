@@ -2,18 +2,21 @@
 	import WordSearchGrid from "./lib/WordSearchGrid.svelte";
 	import Wordbank from "./lib/Wordbank.svelte";
 	import { getWords } from "./words";
-	const words = getWords();
+	const wordlist = new URLSearchParams(window.location.search).get("wordlist")
+	console.log(wordlist)
+	const words = getWords(wordlist);
 	let isSidebarActive = false;
 	function toggleSidebar() {
 		isSidebarActive = !isSidebarActive;
 	}
 
 	let foundWords: string[] = [];
-	function handleFoundWord(e:CustomEvent<{word:string}>) {
+	function handleFoundWord(e: CustomEvent<{ word: string }>) {
 		const word = e.detail.word;
 		foundWords.push(word);
 		foundWords = foundWords;
 	}
+	let restart: () => void;
 </script>
 
 <div class="flex gap-4 min-h-[100vh]">
@@ -51,10 +54,20 @@
 	{/if}
 	<main class="flex flex-col justify-start pt-10 items-center flex-1">
 		<div class="p-2 aspect-square max-w-[900px] h-auto max-h-screen w-full">
-			<WordSearchGrid {words} on:foundWord={handleFoundWord} />
+			<WordSearchGrid bind:restart {words} on:foundWord={handleFoundWord} />
 		</div>
 	</main>
 </div>
+
+{#if foundWords.length == words.length}
+	<div class="backdrop-filter blur">
+		<div class="max-w-xs p-5">
+			<h2>Congrats!</h2>
+			<p>You found all {words.length} words</p>
+			<button on:click={restart}>Play again?</button>
+		</div>
+	</div>
+{/if}
 
 <style>
 	:global(html, body) {
@@ -64,10 +77,9 @@
 		min-height: 100vh;
 		margin: 0;
 		padding: 0;
-		overflow: hidden;
 	}
 	:global(:root) {
-		overflow: hidden;
+		overflow-x: hidden;
 		@apply bg-amber-50 text-amber-900;
 	}
 	#app {
