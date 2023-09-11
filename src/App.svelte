@@ -1,11 +1,12 @@
 <script lang="ts">
+	import { fade } from "svelte/transition";
 	import WordSearchGrid from "./lib/WordSearchGrid.svelte";
 	import Wordbank from "./lib/Wordbank.svelte";
 	import { getWords } from "./words";
-	const wordlist = new URLSearchParams(window.location.search).get("wordlist")
-	console.log(wordlist)
+	const wordlist = new URLSearchParams(window.location.search).get("wordlist");
+	console.log(wordlist);
 	const words = getWords(wordlist);
-	let isSidebarActive = false;
+	let isSidebarActive = true;
 	function toggleSidebar() {
 		isSidebarActive = !isSidebarActive;
 	}
@@ -28,11 +29,12 @@
 		{#if isSidebarActive}
 			{@html "&larr;"}
 		{:else}
-			{@html "&rarr;"}
+			{@html "menu"}
 		{/if}
 	</button>
 	{#if isSidebarActive}
 		<aside
+			transition:fade
 			class="md:max-w-[252px] shadow z-10 md:shadow-none absolute w-[80vw] h-full md:h-auto md:relative flex-1 bg-zinc-50 text-amber-700 pt-12"
 		>
 			<article class="border-b pb-5">

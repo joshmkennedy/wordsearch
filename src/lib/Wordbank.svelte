@@ -1,6 +1,8 @@
 <script lang="ts">
+    import { slide } from "svelte/transition";
+
 	export let words: string[] = [];
-	export let isOpen = false;
+	export let isOpen = true;
 	export let foundWords: string[] = [];
 </script>
 
@@ -19,7 +21,7 @@
 		</button>
 	</header>
 	{#if isOpen}
-	<ol class="list-decimal px-2">
+	<ol transition:slide class="list-decimal px-2">
 		{#each words as word}
 			<li class={`list-decimal ml-5 ${foundWords.includes(word) ? 'line-through' :''}`}>{word}</li>
 		{/each}
