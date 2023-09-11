@@ -37,6 +37,7 @@
 			transition:fade
 			class="md:max-w-[252px] shadow z-10 md:shadow-none absolute w-[80vw] h-full md:h-auto md:relative flex-1 bg-zinc-50 text-amber-700 pt-12"
 		>
+		<div class="sticky top-12 ">
 			<article class="border-b pb-5">
 				<header class="p-2 flex items-baseline justify-between gap-1">
 					<h2 class="font-bold">Found Words</h2>
@@ -52,6 +53,7 @@
 				</div>
 			</article>
 			<Wordbank {words} {foundWords} />
+			<div>
 		</aside>
 	{/if}
 	<main class="flex flex-col justify-start pt-10 items-center flex-1">
