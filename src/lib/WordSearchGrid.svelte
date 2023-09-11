@@ -83,7 +83,7 @@
 	on:pointerleave={stopSelecting}
 	on:mouseup={stopSelecting}
 	on:pointermove={selectWord}
-	class="bg-zinc-50"
+	class="bg-zinc-50 max-w-[800px] mx-auto"
 	style="touch-action:none;"
 >
 	{#each grid as row}
