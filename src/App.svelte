@@ -4,9 +4,8 @@
 	import Wordbank from "./lib/Wordbank.svelte";
 	import { getWords } from "./words";
 	const wordlist = new URLSearchParams(window.location.search).get("wordlist");
-	console.log(wordlist);
 	const words = getWords(wordlist);
-	let isSidebarActive = true;
+	let isSidebarActive = false;
 	function toggleSidebar() {
 		isSidebarActive = !isSidebarActive;
 	}

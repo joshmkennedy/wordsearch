@@ -1,0 +1,17 @@
+export const noodles = [
+	"Noodles",
+	"Company",
+	"Pasta",
+	"Menu",
+	"Ramen",
+	"Thai",
+	"Asian",
+	"Fusion",
+	"Lunch",
+	"Ingredients",
+	"Bowls",
+	"Broth",
+	"Stirfry",
+	"Toppings",
+	"Wok",
+];

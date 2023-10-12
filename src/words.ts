@@ -1,3 +1,4 @@
+import {noodles} from "./bdayweek/noodles";
 
 const fruitList = [
 	"acai",
@@ -77,9 +78,11 @@ let HCS = [
 	"backpack",
 ]
 
+
 let wordLists:Record<string, string[]> = {
 	fruitlist:fruitList,
 	hcs:HCS,
+	noodles,
 }
 
 
