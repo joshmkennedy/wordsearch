@@ -1,5 +1,5 @@
 import {noodles} from "./bdayweek/noodles";
-import {dinner} from "./bdayweek/dinner";
+import {dinner, grahms} from "./bdayweek/week";
 
 const fruitList = [
 	"acai",
@@ -85,6 +85,7 @@ let wordLists:Record<string, string[]> = {
 	hcs:HCS,
 	noodles,
 	dinner,
+	grahms,
 }
 
 
@@ -93,8 +94,9 @@ export function getWords(wordList:string):string[]{
 	if (wordList in wordLists){
 		list = wordLists[wordList]
 	}
-	const ws = [...list]
+	let ws = [...list]
 	ws.sort((a,b)=>Math.random() > .5 ? 1 : -1)
 	ws.length = 12 
+	ws = ws.filter(Boolean)
 	return ws
 }

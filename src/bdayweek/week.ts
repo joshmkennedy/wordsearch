@@ -12,3 +12,16 @@ export const dinner = [
 	"seasoning",
 	"homecooked",
 ]
+
+export const grahms = [
+	"crossword",
+	"speed",
+	"boardgame",
+	"letters",
+	"banana",
+	"spelling",
+	"tiles",
+	"peel",
+	"words",
+	"dictionary",
+];
