@@ -25,3 +25,18 @@ export const grahms = [
 	"words",
 	"dictionary",
 ];
+
+export const relaxation = [
+"Aromatherapy",
+"Massage",
+"Exfoliation",
+"Serum",
+"Relaxation",
+"Rejuvenation",
+"Hydration",
+"Masques",
+"Cuticle",
+"Acrylics",
+"Shiatsu",
+"Kneading",
+];
