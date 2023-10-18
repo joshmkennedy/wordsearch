@@ -30,7 +30,7 @@ function generateGrid(rowsLength: number, columnsLength: number) {
 		grid[y] = [];
 		for (let x = 0; x < columnsLength; x++) {
 			grid[y][x] = {
-				ch: String.fromCharCode(Math.floor(Math.random() * 26) + 97),
+				ch: String.fromCharCode(getRandomNumber(97, 122)),
 				column: x,
 				row: y,
 			};
@@ -102,3 +102,12 @@ export function fitToScreen() {
 	}
 	return { columns: 25, rows: 25 };
 }
+
+const getRandomNumber = (min:number, max:number) => {
+  const range = max - min + 1;
+  const randomBuffer = new Uint32Array(1);
+  window.crypto.getRandomValues(randomBuffer);
+  const randomNumber = randomBuffer[0] % range + min;
+  return randomNumber;
+};
+
