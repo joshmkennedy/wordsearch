@@ -54,3 +54,16 @@ export const read = [
   "sleep",
   "candles",
 ];
+
+export const choc = [
+"cocoa",
+"sweet",
+"bitter",
+"decadent",
+"cravings",
+"coffee",
+"bar",
+"dark",
+"milk",
+"beans",
+]
